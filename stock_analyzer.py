@@ -21,15 +21,8 @@ def getStockInfo():
 
     stockInfo = {}
     for stock in stocks:
-        try:
+        avgPrice,annualizedReturn,standardDeviation = getAnnualizedReturn(stock)
 
-            if getAnnualizedReturn(stock) == None:
-                continue
-            avgPrice,annualizedReturn,standardDeviation = getAnnualizedReturn(stock)
-        except:
-            print("error")
-
-        
         stockInfo[stock] = {"avgPrice":avgPrice,"annualizedReturn": annualizedReturn,"standardDeviation":standardDeviation}
         print(stock) 
         print(stockInfo[stock])
@@ -50,12 +43,11 @@ def callAPI(stock):
 
 def getDatePrice(apiCall):
     price2_Date = {}
-    try:
-        for key in apiCall['Monthly Time Series']:
-            price2_Date[key] = apiCall['Monthly Time Series'][key]['2. high']
+    for key in apiCall['Monthly Time Series']:
+        price2_Date[key] = apiCall['Monthly Time Series'][key]['2. high']
 
-    except:
-        print("Invalid Name")
+    #except:
+        #print("Invalid Name")
     
 
     return price2_Date
@@ -72,32 +64,35 @@ def getAnnualizedReturn(stock):
             break
         month2Price[key] = stockTable[key]
         counter += 1
-    prices = []
+        
+    return month2Price
+    ##prices = []
 
-    for key in month2Price:
-        prices.append(int(float(month2Price[key])))
-    if len(prices):
-        annualizedReturn  = (prices[0] - prices[-1]) / prices[0]
-        isNegative = annualizedReturn < 0
-        if isNegative:
-            annualizedReturn *= -1 
 
-        annualizedReturn *=  100
 
-        averagePrice = 0 
-        for price in prices:
-            averagePrice += price
-        averagePrice /= len(prices)
+    # for key in month2Price:
+    #     prices.append(int(float(month2Price[key])))
 
-        standardDeviation = 0
-        for price in prices:
-            standardDeviation += (price - averagePrice) ** 2
+    # annualizedReturn  = (prices[0] - prices[-1]) / prices[0]
+    # isNegative = annualizedReturn < 0
+    # if isNegative:
+    #     annualizedReturn *= -1 
 
-        standardDeviation /= len(prices)
+    # annualizedReturn *=  100
 
-        return (averagePrice,annualizedReturn,math.sqrt(standardDeviation))
-    else:
-        return None
+    # averagePrice = 0 
+    # for price in prices:
+    #     averagePrice += price
+    # averagePrice /= len(prices)
+
+    # standardDeviation = 0
+    # for price in prices:
+    #     standardDeviation += (price - averagePrice) ** 2
+
+    # standardDeviation /= len(prices)
+
+    # return (averagePrice,annualizedReturn,math.sqrt(standardDeviation))
+
 
 
 

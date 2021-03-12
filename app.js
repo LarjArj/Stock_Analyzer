@@ -25,7 +25,7 @@ function parseStockTable(){
 
 
 function processEvent() {
-    let Human = processForm();
+    let inputForm = processForm();
     let Dinos = getRandomDinos();
     let Dinosaurs = {};
     let factToInsert=null;
@@ -234,4 +234,13 @@ function swap(a,b,array){
 
 
 
+}
+
+
+
+
+async function fetchText() {
+    let response = await fetch();
+    let data = await response.text();
+    console.log(data);
 }
