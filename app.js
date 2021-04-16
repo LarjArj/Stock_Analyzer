@@ -132,14 +132,14 @@ function compareAveragePrice (otherStock,InputtedStock){
 
 function compareVolatility (otherStock,InputtedStock){
     if (otherStock.averagePrice==InputtedStock.averagePrice){
-        potentialFact ="Both "+otherStock.tickerSymbol+" and" + InputtedStock.tickerSymbol + "have the same averagePrice";
+        potentialFact ="Both "+otherStock.tickerSymbol+" and" + InputtedStock.tickerSymbol + "have the same level of volatility";
    }
    
    if (otherStock.averagePrice>InputtedStock.averagePrice){
-       potentialFact = otherStock.tickerSymbol+" trades at average price of" + "more than " + InputtedStock.tickerSymbol + "price";
+       potentialFact = otherStock.tickerSymbol+" has a greater level of volatility than " + InputtedStock.tickerSymbol;
    }
    else{
-        potentialFact = otherStock.tickerSymbol+" trades at average price of" + "less than " + InputtedStock.tickerSymbol + "price"
+        potentialFact = otherStock.tickerSymbol+" has a lower level of volatility than " + InputtedStock.tickerSymbol;
    }
    return potentialFact;
 }
@@ -153,7 +153,7 @@ function compareAnnualizedReturn(otherStock,InputtedStock){
        potentialFact = otherStock.tickerSymbol+"has annualized return of" + "more than " + InputtedStock.tickerSymbol + ;
    }
    else{
-        potentialFact = otherStock.tickerSymbol+" has an annualized return " + "less than " + InputtedStock.tickerSymbol + "price"
+        potentialFact = otherStock.tickerSymbol+" has an annualized return " + "less than of " + InputtedStock.tickerSymbol + "price"
    }
    return potentialFact;
 
